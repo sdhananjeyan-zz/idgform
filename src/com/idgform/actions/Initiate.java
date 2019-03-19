@@ -1,4 +1,4 @@
-package com.actions.idgform;
+package com.idgform.actions;
 
 public class Initiate
 {
