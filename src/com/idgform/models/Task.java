@@ -18,7 +18,7 @@ public class Task
     private Date startTime;
     private Date endTime;
     @ManyToOne
-    private User user;
+    private FormUser formUser;
 
     public long getId()
     {
@@ -60,14 +60,14 @@ public class Task
         this.endTime = endTime;
     }
 
-    public User getUser()
+    public FormUser getFormUser()
     {
-        return user;
+        return formUser;
     }
 
-    public void setUser(User user)
+    public void setFormUser(FormUser formUser)
     {
-        this.user = user;
+        this.formUser = formUser;
     }
 
     @Override

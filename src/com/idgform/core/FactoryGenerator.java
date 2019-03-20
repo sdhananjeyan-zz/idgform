@@ -4,9 +4,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import com.idgform.models.FormUser;
 import com.idgform.models.Operations;
 import com.idgform.models.Task;
-import com.idgform.models.User;
 
 public class FactoryGenerator
 {
@@ -16,7 +16,7 @@ public class FactoryGenerator
     {
         Configuration configuration = new Configuration();
 
-        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(FormUser.class);
         configuration.addAnnotatedClass(Task.class);
         configuration.addAnnotatedClass(Operations.class);
 

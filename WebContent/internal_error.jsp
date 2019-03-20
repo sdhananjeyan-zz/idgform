@@ -5,11 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>IDG Form</title>
 </head>
 <body>
-	Hello World
-	<div style="align:right;length:10%;backgroud-color:grey;color:white"><s:property value="logedInUser"/></div>
-	<div style="align:right;length:10%;backgroud-color:grey;color:white"><a href="/idgform/logout.action">logout</a></div>
+	500!: something went wrong, please try again!
+	<div style="align:left;length:10%;backgroud-color:grey;color:white"><a href="/idgform">back</a></div>
 </body>
 </html>

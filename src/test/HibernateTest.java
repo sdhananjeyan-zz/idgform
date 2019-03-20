@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.idgform.core.FactoryGenerator;
-import com.idgform.models.User;
+import com.idgform.models.FormUser;
 
 public class HibernateTest
 {
@@ -15,9 +15,9 @@ public class HibernateTest
         try
         {
             hbSession.beginTransaction();
-            User user = new User();
+            FormUser user = new FormUser();
             user.setName("admin");
-            user.setPassword("root".toCharArray());
+            user.setPassword("root");
             user.setEmail("admin@idgform.com");
             hbSession.save(user);
             hbSession.getTransaction().commit();

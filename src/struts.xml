@@ -3,10 +3,24 @@
 Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 
 <struts>
-	<package name="default" extends="json-default">
-		<action name="initiate" class="com.actions.idgform.Initiate"
-			method="execute">
+
+	  
+	<package name="default" extends="struts-default">
+		<action name="login" class="com.idgform.actions.Login">
 			<result name="success">/form.jsp</result>
+			<result name="auth_failed">/auth_failed.jsp</result>
+			<result name="no_user">/auth_failed.jsp</result>
+			<result name="error">/internal_error.jsp</result>
+		</action>
+		
+		<action name="logout" class="com.idgform.actions.Logout">
+			<result name="success">/index.jsp</result>
+		</action>
+	</package>
+
+	<package name="operations" extends="json-default">
+		<action name="list_tasks" class="com.idgform.actions.ListTasks">
+			<result type="json"></result>
 		</action>
 	</package>
 

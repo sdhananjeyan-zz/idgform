@@ -17,7 +17,7 @@ public class Operations
     private Date actionTime;
     private String Description;
     @ManyToOne
-    private User editedUser;
+    private FormUser editedUser;
     @ManyToOne
     private Task task;
 
@@ -51,14 +51,24 @@ public class Operations
         Description = description;
     }
 
-    public User getEditedUser()
+    public FormUser getEditedUser()
     {
         return editedUser;
     }
 
-    public void setEditedUser(User editedUser)
+    public void setEditedUser(FormUser editedUser)
     {
         this.editedUser = editedUser;
+    }
+
+    public Task getTask()
+    {
+        return task;
+    }
+
+    public void setTask(Task task)
+    {
+        this.task = task;
     }
 
 }

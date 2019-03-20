@@ -5,14 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User
+public class FormUser
 {
 
     @Id
     @GeneratedValue
     private long id;
     private String name;
-    private char[] password;
+    private String password;
     private String email;
 
     public long getId()
@@ -35,12 +35,12 @@ public class User
         this.name = name;
     }
 
-    public char[] getPassword()
+    public String getPassword()
     {
         return password;
     }
 
-    public void setPassword(char[] password)
+    public void setPassword(String password)
     {
         this.password = password;
     }
