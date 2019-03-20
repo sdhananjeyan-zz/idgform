@@ -10,6 +10,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
 </head>
 <body ng-app="myapp">
+	<div align="right">
+		<s:property value="logedInUser"/>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/idgform/logout.action">Log out</a>
+	</div>
 	<div ng-controller="formController">
 		<h3 align="center">TO-DO Tasks</h3>
 		<br> <br>
