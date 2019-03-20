@@ -78,7 +78,7 @@ public class AddTask implements SessionAware
         catch (Exception e)
         {
             response.put("status", "failed");
-            response.put("message", e.getMessage());
+            response.put("message", "internal error");
             response.put("stack", e.getStackTrace());
             return result;
         }
@@ -90,23 +90,8 @@ public class AddTask implements SessionAware
             }
         }
         response.put("status", "success");
-        response.put("message", "Task successfully added");
+        response.put("message", "Task successfully updated");
         return result;
-    }
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public String getStartTime()
-    {
-        return startTime;
-    }
-
-    public String getEndTime()
-    {
-        return endTime;
     }
 
     @Override

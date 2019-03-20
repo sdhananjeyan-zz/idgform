@@ -29,7 +29,7 @@
 					<td>{{task.startTime}}</td>
 					<td>{{task.endTime}}</td>
 					<td><button ng-click="edit(task)">EDIT</button>
-						<button ng-click="delete(task)">DELETE</button></td>
+						<button ng-click="deleteTask(task)">DELETE</button></td>
 				</tr>
 			</table>
 		</div>
@@ -87,7 +87,7 @@
 						ng-model="endTimeToEdit" /></td>
 				</tr>
 				<tr>
-					<td style="width: 50%"><button ng-click="update()">UPDATE</button></td>
+					<td style="width: 50%"><button ng-click="updateTask()">UPDATE</button></td>
 					<td style="width: 50%"><button ng-click="cancelEdit()">CANCEL</button></td>
 				</tr>
 			</table>
@@ -131,9 +131,6 @@
 							$scope.editEnabled = false;
 						}
 
-						$scope.deleteTask = function(id) {
-
-						}
 
 						$scope.taskToAdd;
 						$scope.startTimeToAdd;
@@ -170,10 +167,10 @@
 						$scope.updateTask = function() {
 
 							var data = {
-								taskId : $scope.IdToEdit,
-								description : $scope.taskToAdd,
-								startTime : $scope.startTimeToAdd,
-								endTime : $scope.endTimeToAdd
+								id : $scope.IdToEdit,
+								description : $scope.taskToEdit,
+								startTime : $scope.startTimeToEdit,
+								endTime : $scope.endTimeToEdit
 							}
 
 							$http
@@ -189,10 +186,10 @@
 											})
 						}
 						
-						$scope.deleteTask = function() {
+						$scope.deleteTask = function(task) {
 
 							var data = {
-								taskId : $scope.IdToEdit,
+								id : task.id,
 							}
 
 							$http
