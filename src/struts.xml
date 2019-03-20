@@ -19,8 +19,37 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 	</package>
 
 	<package name="operations" extends="json-default">
+		
 		<action name="list_tasks" class="com.idgform.actions.ListTasks">
-			<result type="json"></result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="json">
+    			<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json"/>
+		</action>
+		
+		<action name="add_task" class="com.idgform.actions.AddTask">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="json">
+    			<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json"/>
+		</action>
+		
+		<action name="update_task" class="com.idgform.actions.UpdateTask">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="json">
+    			<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json"/>
+		</action>
+		
+		<action name="delete_task" class="com.idgform.actions.DeleteTask">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="json">
+    			<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json"/>
 		</action>
 	</package>
 

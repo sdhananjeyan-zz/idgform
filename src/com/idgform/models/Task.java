@@ -19,6 +19,7 @@ public class Task
     private Date endTime;
     @ManyToOne
     private FormUser formUser;
+    private Date dateAdded;
 
     public long getId()
     {
@@ -74,6 +75,16 @@ public class Task
     public String toString()
     {
         return "Task: " + taskDescription + " Start Time: " + startTime + " End Time: " + endTime;
+    }
+
+    public Date getDateAdded()
+    {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded)
+    {
+        this.dateAdded = dateAdded;
     }
 
 }

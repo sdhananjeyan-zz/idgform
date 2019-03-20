@@ -1,7 +1,6 @@
 package com.idgform.actions;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,64 +66,6 @@ public class ListTasks implements SessionAware
     public Map<String, Object> getResponse()
     {
         return response;
-    }
-
-}
-
-class ResponseTask
-{
-
-    private long id;
-    private String taskDescription;
-    private Date startTime;
-    private Date endTime;
-
-    public ResponseTask(Task task)
-    {
-        setEndTime(task.getEndTime());
-        setStartTime(task.getStartTime());
-        setId(task.getId());
-        setTaskDescription(task.getTaskDescription());
-    }
-
-    public long getId()
-    {
-        return id;
-    }
-
-    public void setId(long id)
-    {
-        this.id = id;
-    }
-
-    public String getTaskDescription()
-    {
-        return taskDescription;
-    }
-
-    public void setTaskDescription(String taskDescription)
-    {
-        this.taskDescription = taskDescription;
-    }
-
-    public Date getStartTime()
-    {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime)
-    {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime()
-    {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime)
-    {
-        this.endTime = endTime;
     }
 
 }
