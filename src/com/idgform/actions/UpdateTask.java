@@ -8,6 +8,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Session;
 
 import com.idgform.core.FactoryGenerator;
+import com.idgform.models.FormUser;
 import com.idgform.models.Task;
 import com.idgform.utils.DateParser;
 

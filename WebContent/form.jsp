@@ -6,8 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>IDG - FORM</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+ <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+ <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 </head>
 <body ng-app="myapp">
 	<div align="right">
@@ -47,19 +52,19 @@
 				<tr>
 					<th style="width: 50%">Task</th>
 					<td style="width: 50%"><input type="text" style="width: 98%"
-						ng-model="taskToAdd" /></td>
+						ng-model="taskToAdd"/></td>
 				</tr>
 				<tr>
 					<th style="width: 50%">Start Time</th>
-					<td style="width: 50%"><input type="text"
+					<td style="width: 50%"><input type="text" class="form_datetime"
 						placeholder="dd-mm-yyyy hh:mm" style="width: 95%; float: right"
-						ng-model="startTimeToAdd" /></td>
+						ng-model="startTimeToAdd" id="addStartDateId" /></td>
 				</tr>
 				<tr>
 					<th style="width: 50%">End Time</th>
-					<td style="width: 50%"><input type="text"
+					<td style="width: 50%"><input type="text" class="form_datetime"
 						placeholder="dd-mm-yyyy hh:mm" style="width: 95%; float: right"
-						ng-model="endTimeToAdd" /></td>
+						ng-model="endTimeToAdd" id="addEndDateId" /></td>
 				</tr>
 				<tr>
 					<td style="width: 100%" colspan="2"><button
@@ -82,13 +87,13 @@
 					<th style="width: 50%">Start Time</th>
 					<td style="width: 50%"><input type="text"
 						placeholder="dd-mm-yyyy hh:mm" style="width: 95%; float: right"
-						ng-model="startTimeToEdit" /></td>
+						ng-model="startTimeToEdit" id="editStartDateId" /></td>
 				</tr>
 				<tr>
 					<th style="width: 50%">End Time</th>
 					<td style="width: 50%"><input type="text"
 						placeholder="dd-mm-yyyy hh:mm" style="width: 95%; float: right"
-						ng-model="endTimeToEdit" /></td>
+						ng-model="endTimeToEdit" id="editEndDateId"/></td>
 				</tr>
 				<tr>
 					<td style="width: 50%"><button ng-click="updateTask()">UPDATE</button></td>
@@ -146,13 +151,12 @@
 						$scope.IdToEdit;
 
 						$scope.addNew = function() {
-
+							
 							var data = {
 								description : $scope.taskToAdd,
 								startTime : $scope.startTimeToAdd,
 								endTime : $scope.endTimeToAdd
 							}
-
 							$http
 									.post('/idgform/add_task.action', data)
 									.success(
@@ -208,9 +212,25 @@
 											})
 						}
 
+						$(".form_datetime").datetimepicker({
+				    		format: 'dd-mm-yyyy hh:ii'
+				    	});
+						$("#addStartDateId").change(function(){
+							$scope.startTimeToAdd = $("#addStartDateId").val();
+						})
+						$("#addEndDateId").change(function(){
+							$scope.endTimeToAdd = $("#addEndDateId").val();
+						})
+						$("#editStartDateId").change(function(){
+							$scope.startTimeToEdit = $("#editStartDateId").val();
+						})
+						$("#editEndDateId").change(function(){
+							$scope.endTimeToEdit = $("#editEndDateId").val();
+						})
 						$scope.initiate();
-
+						
 					});
+    	
 </script>
 <style>
 table, th, td {
