@@ -24,7 +24,7 @@
 		<br> <br>
 		<div
 			style="margin-left: 10%; margin-right: 10%; width: 80%; height: 300px; overflow: scroll;">
-			<table style="width: 100%; align: center;">
+			<table class="list" style="width: 100%; align: center;">
 				<tr>
 					<th width="10%">Task Id</th>
 					<th width="40%">Description</th>
@@ -44,40 +44,39 @@
 		</div>
 		<br>
 		<div name="add form"
-			style="margin-left: 10%; margin-right: 10%; width: 80%;"
+			style="margin-left: 10%; margin-right: 10%; width: 80%;background-color: #f2f2f2;"
 			ng-show="addEnabled">
 			<h3 align="center">ADD Task</h3>
 			<br>
-			<table style="width: 100%">
+			<table class="form" style="width: 60%">
 				<tr>
 					<th style="width: 50%">Task</th>
-					<td style="width: 50%"><input type="text" style="width: 98%"
-						ng-model="taskToAdd"/></td>
+					<td style="width: 50%">
+					<input type="text" style="width: 98%" ng-model="taskToAdd"/></td>
 				</tr>
 				<tr>
 					<th style="width: 50%">Start Time</th>
 					<td style="width: 50%"><input type="text" class="form_datetime"
-						placeholder="dd-mm-yyyy hh:mm" style="width: 95%; float: right"
+						placeholder="dd-mm-yyyy hh:mm" style="width: 50%;"
 						ng-model="startTimeToAdd" id="addStartDateId" /></td>
 				</tr>
 				<tr>
 					<th style="width: 50%">End Time</th>
 					<td style="width: 50%"><input type="text" class="form_datetime"
-						placeholder="dd-mm-yyyy hh:mm" style="width: 95%; float: right"
+						placeholder="dd-mm-yyyy hh:mm" style="width: 50%;"
 						ng-model="endTimeToAdd" id="addEndDateId" /></td>
 				</tr>
 				<tr>
-					<td style="width: 100%" colspan="2"><button
-							ng-click="addNew()">ADD</button></td>
+					<td style="width: 100%" colspan="2"><button style="width:30%;" ng-click="addNew()">ADD</button></td>
 				</tr>
 			</table>
 		</div>
 		<div name="add form"
-			style="margin-left: 10%; margin-right: 10%; width: 80%;"
+			style="margin-left: 10%; margin-right: 10%; width: 80%;background-color: #f2f2f2;"
 			ng-show="editEnabled">
 			<h3 align="center">EDIT Task</h3>
 			<br>
-			<table style="width: 100%">
+			<table class="form" style="width: 60%">
 				<tr>
 					<th style="width: 50%">Task</th>
 					<td style="width: 50%"><input type="text" style="width: 98%"
@@ -86,19 +85,19 @@
 				<tr>
 					<th style="width: 50%">Start Time</th>
 					<td style="width: 50%"><input type="text"
-						placeholder="dd-mm-yyyy hh:mm" style="width: 95%; float: right"
+						placeholder="dd-mm-yyyy hh:mm" style="width: 50%;" class="form_datetime"
 						ng-model="startTimeToEdit" id="editStartDateId" /></td>
 				</tr>
 				<tr>
 					<th style="width: 50%">End Time</th>
 					<td style="width: 50%"><input type="text"
-						placeholder="dd-mm-yyyy hh:mm" style="width: 95%; float: right"
+						placeholder="dd-mm-yyyy hh:mm" style="width: 50%;" class="form_datetime"
 						ng-model="endTimeToEdit" id="editEndDateId"/></td>
 				</tr>
 				<tr>
-					<td style="width: 50%"><button ng-click="updateTask()">UPDATE</button></td>
-					<td style="width: 50%"><button ng-click="cancelEdit()">CANCEL</button></td>
-				</tr>
+					<td style="width: 50%"><button style="width:30%;" ng-click="updateTask()">UPDATE</button></td>
+					<td style="width: 50%"><button style="width:30%;" ng-click="cancelEdit()">CANCEL</button></td>
+				</tr> 
 			</table>
 		</div>
 	</div>
@@ -108,7 +107,7 @@
 			.module("myapp", [])
 			.controller(
 					"formController",
-					function($scope, $http) {
+					function($scope, $http,$interval) {
 						$scope.initiate = function() {
 							$http
 									.get("/idgform/list_tasks.action")
@@ -228,15 +227,44 @@
 							$scope.endTimeToEdit = $("#editEndDateId").val();
 						})
 						$scope.initiate();
+						$interval(function(){
+							$scope.initiate();
+						},10000)
 						
 					});
     	
 </script>
 <style>
-table, th, td {
-	border: 1px solid black;
-	text-align: center;
+
+.list td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
+
+.list th {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  background: #bfd7fc;
+}
+
+.list tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+
+.form td,th {
+  padding: 15px;
+  text-align: center;
+  align-content: center;
+  
+}
+.form{
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
 
 /* .no-border > table,th,td {
 		border: 0px solid black;

@@ -10,7 +10,7 @@
 	
 	<br>
 	<form name="login_form" method="post" action="/idgform/login.action">
-		<table align="center" width="60%">
+		<table align="center" width="60%" style="background: #bfd7fc;">
 			<tr width="100%">
 				<td width="50%"><b>User Id</b></td>
 				<td width="50%"><input type="text" id="userid_id" name="userId"/></td>
@@ -20,9 +20,30 @@
 				<td width="50%"><input type="password" id="password_id" name="password"/></td>
 			</tr>
 			<tr width="100%">
-				<td width="100%" align="center"><b><input type="submit"/></b></td>
+				<td width="100%" align="center"><b><input type="submit" style="width:30%;"value="LOGIN"/></b></td>
 			</tr>
 		</table>
 	</form>
 </body>
+<style>
+
+td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  background: #bfd7fc;
+}
+
+.list tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+
+</style>
 </html>
