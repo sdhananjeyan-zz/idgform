@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 
 import com.idgform.core.FactoryGenerator;
@@ -31,6 +32,11 @@ public class DeleteTask implements SessionAware
             Task task = (Task) hbSession.load(Task.class, id);
             hbSession.delete(task);
             hbSession.getTransaction().commit();
+        }
+        catch (ObjectNotFoundException e)
+        {
+            response.put("status", "failed");
+            response.put("message", "invalid id supplied");
         }
         catch (Exception e)
         {

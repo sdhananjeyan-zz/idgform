@@ -55,6 +55,12 @@ public class AddTask implements SessionAware
             response.put("message", "access denied");
             return result;
         }
+        validateInputs();
+        if (!response.isEmpty())
+        {
+            response.put("status", "failed");
+            return result;
+        }
         Session hbSession = FactoryGenerator.getHibernateSessionFactory().openSession();
         try
         {
@@ -68,12 +74,6 @@ public class AddTask implements SessionAware
             task.setDateAdded(new Date());
             hbSession.save(task);
             hbSession.getTransaction().commit();
-        }
-        catch (ParseException e)
-        {
-            response.put("status", "failed");
-            response.put("message", "invalid input supplied");
-            return result;
         }
         catch (Exception e)
         {
@@ -92,6 +92,38 @@ public class AddTask implements SessionAware
         response.put("status", "success");
         response.put("message", "Task successfully updated");
         return result;
+    }
+
+    private void validateInputs()
+    {
+        Date start = null, end = null;
+        if (description.length() > 255)
+        {
+            response.put("message", "Invalid input, task description cannot exceed 255 characters");
+        }
+        try
+        {
+            start = DateParser.stringToDate(startTime + ":00");
+        }
+        catch (ParseException e)
+        {
+            response.put("message", "Invalid input, start time given is invalid");
+        }
+        try
+        {
+            end = DateParser.stringToDate(endTime + ":00");
+        }
+        catch (ParseException e)
+        {
+            response.put("message", "Invalid input, end time given is invalid -> " + endTime + e);
+        }
+        if (start != null && end != null)
+        {
+            if (start.compareTo(end) > 0)
+            {
+                response.put("message", "Invalid input, end time cannot be before start");
+            }
+        }
     }
 
     @Override

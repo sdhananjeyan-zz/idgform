@@ -1,14 +1,15 @@
 package com.idgform.actions;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 
 import com.idgform.core.FactoryGenerator;
-import com.idgform.models.FormUser;
 import com.idgform.models.Task;
 import com.idgform.utils.DateParser;
 
@@ -31,6 +32,12 @@ public class UpdateTask implements SessionAware
             response.put("message", "access denied");
             return result;
         }
+        validateInputs();
+        if (!response.isEmpty())
+        {
+            response.put("status", "failed");
+            return result;
+        }
         Session hbSession = FactoryGenerator.getHibernateSessionFactory().openSession();
         try
         {
@@ -43,12 +50,10 @@ public class UpdateTask implements SessionAware
             hbSession.update(task);
             hbSession.getTransaction().commit();
         }
-        catch (ParseException e)
+        catch (ObjectNotFoundException e)
         {
             response.put("status", "failed");
-            response.put("message", "invalid input supplied");
-            hbSession.getTransaction().rollback();
-            return result;
+            response.put("message", "invalid id supplied");
         }
         catch (Exception e)
         {
@@ -67,6 +72,38 @@ public class UpdateTask implements SessionAware
         response.put("status", "success");
         response.put("message", "Task successfully updated");
         return result;
+    }
+
+    private void validateInputs()
+    {
+        if (description.length() > 255)
+        {
+            response.put("message", "Invalid input, task description cannot exceed 255 characters");
+        }
+        Date start = null, end = null;
+        try
+        {
+            start = DateParser.stringToDate(startTime + ":00");
+        }
+        catch (ParseException e)
+        {
+            response.put("message", "Invalid input, start time given is invalid ");
+        }
+        try
+        {
+            end = DateParser.stringToDate(endTime + ":00");
+        }
+        catch (ParseException e)
+        {
+            response.put("message", "Invalid input, end time given is invalid");
+        }
+        if (start != null && end != null)
+        {
+            if (start.compareTo(end) > 0)
+            {
+                response.put("message", "Invalid input, end time cannot be before start");
+            }
+        }
     }
 
     @Override
